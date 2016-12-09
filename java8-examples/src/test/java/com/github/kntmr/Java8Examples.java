@@ -75,4 +75,69 @@ public class Java8Examples {
         System.out.println(map);
     }
 
+    @Test
+    public void test07() {
+        Map<String, String> map = new HashMap<>();
+        map.put("foo", "hoge");
+        map.put("bar", "fuga");
+        map.put("baz", "piyo");
+
+        map.forEach((key, value) -> System.out.printf("key=%s, value=%s%n", key, value));
+    }
+
+    @Test
+    public void test08() {
+        Map<String, String> map = new HashMap<>();
+        map.put("foo", "hoge");
+        map.put("bar", "fuga");
+        map.put("baz", "piyo");
+
+        System.out.println(map.getOrDefault("bar", "default bar")); // bar の値が出力される
+        System.out.println(map.getOrDefault("xxx", "default value")); // defaultValue が出力される
+    }
+
+    @Test
+    public void test09() {
+        Map<String, String> map = new HashMap<>();
+        map.put("foo", "hoge");
+        map.put("bar", "fuga");
+        map.put("baz", "piyo");
+
+        System.out.println(map);
+        map.merge("foo", "HOGE", (value1, value2) -> value1.concat(value2)); // remappingFunction が実行される
+        map.merge("xxx", "XXXX", (value1, value2) -> value1.concat(value2)); // 新しく要素が追加される
+        map.merge("baz", "PIYO", (value1, value2) -> null); // baz が削除される
+        System.out.println(map);
+    }
+
+    @Test
+    public void test10() {
+        Map<String, String> map = new HashMap<>();
+        map.put("foo", "hoge");
+        map.put("bar", "fuga");
+        map.put("baz", "piyo");
+
+        System.out.println(map);
+        map.remove("foo", "XXXX"); // 削除されない
+        map.remove("xxx", "hoge"); // 削除されない
+        map.remove("baz", "piyo"); // 削除される
+        System.out.println(map);
+    }
+
+    @Test
+    public void test11() {
+        Map<String, String> map = new HashMap<>();
+        map.put("foo", "hoge");
+        map.put("bar", "fuga");
+        map.put("baz", "piyo");
+
+        System.out.println(map);
+        map.replace("foo", "XXXX", "HOGE"); // 更新されない
+        map.replace("xxx", "hoge", "HOGE"); // 更新されない
+        map.replace("baz", "piyo", "PIYO"); // 更新される
+        map.replace("bar", "FUGA"); // 更新される
+        map.replace("xxx", "XXXX");
+        System.out.println(map);
+    }
+
 }
