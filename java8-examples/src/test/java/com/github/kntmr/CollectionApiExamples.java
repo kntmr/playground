@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CollectionAPIPractices {
+public class CollectionApiExamples {
 
     @Test
     public void test01() {

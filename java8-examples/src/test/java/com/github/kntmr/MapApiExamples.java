@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapAPIPractices {
+public class MapApiExamples {
 
     @Test
     public void test01() {
