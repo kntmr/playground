@@ -75,9 +75,18 @@ public class ConcurrentExamples {
                 System.out.println(f.get(1, TimeUnit.SECONDS)); // 1秒待つ
             }
         } catch (TimeoutException e) {
-            System.out.println(e); // タイムアウト
+            System.out.println("Timeout... > " + e); // タイムアウト
         }
+    }
 
+    @Test
+    public void test06() throws Exception {
+        ScheduledExecutorService es = Executors.newScheduledThreadPool(3);
+        ScheduledFuture<?> f = es.scheduleWithFixedDelay(
+                () -> System.out.println(Thread.currentThread().getId()), 5, 3, TimeUnit.SECONDS); // 5秒遅延してから3秒間隔でタスクを実行する
+
+        Thread.sleep(30000);
+        f.cancel(true); // タスクの取り消し
     }
 
 }
