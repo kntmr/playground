@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -79,6 +81,47 @@ public class StreamAPITests {
 
         IntStream source1 = IntStream.rangeClosed(1, 10);
         System.out.println(source1.sum());
+    }
+
+    @Test
+    public void test06() {
+        List<Musician> musicians = Arrays.asList(
+            new Musician("Jimi Hendrix", Musician.Category.ROCK),
+            new Musician("Eric Dolphy", Musician.Category.JAZZ),
+            new Musician("J.S.Bach", Musician.Category.CLASSICAL),
+            new Musician("Charles Mingus", Musician.Category.JAZZ)
+        );
+
+        Map<Musician.Category, List<String>> map = musicians.stream()
+            .collect(Collectors.groupingBy(
+                    Musician::getCategory,
+                    Collectors.mapping(Musician::getName, Collectors.toList())));
+
+        System.out.println(map);
+    }
+
+    static class Musician {
+
+        public enum Category {
+            ROCK, JAZZ, CLASSICAL;
+        }
+
+        private String name;
+        private Category category;
+
+        public Musician(String name, Category category) {
+            this.name = name;
+            this.category = category;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public Category getCategory() {
+            return category;
+        }
+
     }
 
 }
