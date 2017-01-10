@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collector;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamAPITests {
@@ -69,6 +70,15 @@ public class StreamAPITests {
                 StringBuilder::toString
         );
         System.out.println(Stream.of('h', 'e', 'l', 'l', 'o').collect(collector2));
+    }
+
+    @Test
+    public void test05() {
+        Stream<Integer> source0 = Stream.of(1, 2, 3, 4, 5 ,6, 7, 8, 9, 10);
+        System.out.println(source0.reduce(0, (i, j) -> i + j));
+
+        IntStream source1 = IntStream.rangeClosed(1, 10);
+        System.out.println(source1.sum());
     }
 
 }
