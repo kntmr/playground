@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Examples</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/index.js"></script>
+</head>
+<body>
+
+  <!-- app.messageで値をリアクティブに更新できる -->
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <!-- v-bind ディレクティブでリアクティブな振る舞いを与える -->
+  <!-- この要素の title 属性を Vue インスタンスの message プロパティによって更新する -->
+  <div id="app-2">
+    <span v-bind:title="message">
+      Hover your mouse over me for a few seconds to see my dynamically bound title!
+    </span>
+  </div>
+
+  <!-- 条件分岐: app3.seen = false にすると要素が非表示になる -->
+  <div id="app-3">
+    <p v-if="seen">Now you see me</p>
+  </div>
+
+  <!-- ループ: app4.todos.push({ text: 'New item' }) で新しい要素を追加できる -->
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+  <!-- v-on ディレクティブでイベントリスナを設定して Vue インスタンスのメソッドを呼び出せる -->
+  <!-- メソッドの中で DOM を直接操作することなくアプリケーションの状態を更新できる -->
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
+  </div>
+
+  <!-- v-model ディレクティブで入力とアプリケーションの状態の双方向バインディングができる -->
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message" />
+  </div>
+
+  <div id="app-7">
+    <ol>
+      <!-- v-bind ディレクティブで todo-item コンポーネントの todo プロパティに値をセットする -->
+      <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+    </ol>
+  </div>
+
+</body>
+</html>
