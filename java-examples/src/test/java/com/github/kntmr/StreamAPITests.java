@@ -3,8 +3,10 @@ package com.github.kntmr;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -122,6 +124,14 @@ public class StreamAPITests {
             return category;
         }
 
+    }
+
+    @Test
+    public void test07() {
+        List<Integer> list = Arrays.asList(7, 2, 5);
+        System.out.println(list.stream().min(Comparator.comparing(n -> n)).get());
+        // Function.identity() は入力引数を返す関数を返す
+        System.out.println(list.stream().min(Comparator.comparing(Function.identity())).get());
     }
 
 }
