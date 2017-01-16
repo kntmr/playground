@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
 
-  var vm1 = new Vue({
+  vm1 = new Vue({
     el: '#app1',
     data: {
       val: 'Hello!'
