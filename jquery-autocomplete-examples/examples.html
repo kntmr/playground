@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Autocomplete</title>
+  <link rel="stylesheet" href="css/jquery.autocomplete.css">
+  <script src="js/jquery-2.2.4.min.js"></script>
+  <script src="js/jquery.autocomplete.min.js"></script>
+  <script>
+  $(function() {
+    var values = [
+      { value: 'foo', id: '1', name: 'FOO' },
+      { value: 'bar', id: '2', name: 'BAR' },
+      { value: 'baz', id: '3', name: 'BAZ' },
+      { value: 'hoge', id: '4', name: 'HOGE' },
+      { value: 'fuga', id: '5', name: 'FUGA' }
+    ];
+    $('#autocomplete1').autocomplete({
+      lookup: values,
+      onSelect: function(suggestion) {
+        console.log('id: ' + suggestion.id + ', name: ' + suggestion.name);
+      }
+    });
+
+    $('#autocomplete2').autocomplete({
+      serviceUrl: 'http://localhost:3000/example',
+      onSelect: function(suggestion) {
+        console.log('id: ' + suggestion.id + ', name: ' + suggestion.name);
+      }
+    });
+
+    $('#autocomplete3').autocomplete({
+      lookup: function(query, done) {
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost:3000/example',
+          data: 'query=' + query,
+          dataType: 'json',
+          success: function(res) {
+            done(res);
+          },
+        });
+      },
+      onSelect: function(suggestion) {
+        console.log('id: ' + suggestion.id + ', name: ' + suggestion.name);
+      }
+    });
+  });
+  </script>
+</head>
+<body>
+
+  <input type="text" id="autocomplete1" placeholder="Local lookup (no Ajax)">
+  <input type="text" id="autocomplete2" placeholder="Ajax lookup">
+  <input type="text" id="autocomplete3" placeholder="Custom lookup function">
+
+</body>
+</html>

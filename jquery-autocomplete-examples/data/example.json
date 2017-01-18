@@ -1,0 +1,11 @@
+{
+  "example": {
+    "suggestions": [
+      { "value": "foo", "id": "1", "name": "FOO" },
+      { "value": "bar", "id": "2", "name": "BAR" },
+      { "value": "baz", "id": "3", "name": "BAZ" },
+      { "value": "hoge", "id": "4", "name": "HOGE" },
+      { "value": "fuga", "id": "5", "name": "FUGA" }
+    ]
+  }
+}
