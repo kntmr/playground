@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Autocomplete</title>
+  <link rel="stylesheet" href="css/jquery.autocomplete.css">
+  <script src="js/jquery-2.2.4.min.js"></script>
+  <script src="js/jquery.autocomplete.min.js"></script>
+  <script>
+  $(function() {
+    var values = [
+      { value: 'Motherless Children / Eric Clapton', id: '1001', title: 'Motherless Children', artist: 'Eric Clapton', album: '461 Ocean Boulevard' },
+      { value: 'I Shot the Sheriff / Eric Clapton', id: '1002', title: 'I Shot the Sheriff', artist: 'Eric Clapton', album: '461 Ocean Boulevard' },
+      { value: 'Before You Accuse Me / Eric Clapton', id: '2001', title: 'Before You Accuse Me', artist: 'Eric Clapton', album: 'Unplugged' },
+      { value: 'Lonely Stranger / Eric Clapton', id: '2002', title: 'Lonely Stranger', artist: 'Eric Clapton', album: 'Unplugged' },
+      { value: 'Running On Faith / Eric Clapton', id: '2003', title: 'Running On Faith', artist: 'Eric Clapton', album: 'Unplugged' },
+      { value: 'You Know What I Mean / Jeff Beck', id: '3001', title: 'You Know What I Mean', artist: 'Jeff Beck', album: 'Blow By Blow' },
+      { value: 'Scatterbrain / Jeff Beck', id: '3002', title: 'Scatterbrain', artist: 'Jeff Beck', album: 'Blow By Blow' },
+      { value: 'Led Boots / Jeff Beck', id: '4001', title: 'Led Boots', artist: 'Jeff Beck', album: 'Wired' },
+      { value: 'Goodbye Pork Pie Hat / Jeff Beck', id: '4002', title: 'Goodbye Pork Pie Hat', artist: 'Jeff Beck', album: 'Wired' },
+      { value: 'Blue Wind / Jeff Beck', id: '4003', title: 'Blue Wind', artist: 'Jeff Beck', album: 'Wired' },
+      { value: 'Take It Easy / Eagles', id: '5001', title: 'Take It Easy', artist: 'Eagles', album: 'The Very Best of the Eagles' },
+      { value: 'Witchy Woman / Eagles', id: '5002', title: 'Witchy Woman', artist: 'Eagles', album: 'The Very Best of the Eagles' },
+      { value: 'New Kid In Town / Eagles', id: '5003', title: 'New Kid In Town', artist: 'Eagles', album: 'The Very Best of the Eagles' },
+      { value: 'ロビンソン / スピッツ', id: '6001', title: 'ロビンソン', artist: 'スピッツ', album: 'ハチミツ' },
+      { value: 'ハチミツ / スピッツ', id: '6002', title: 'ハチミツ', artist: 'スピッツ', album: 'ハチミツ' },
+      { value: 'インディゴ地平線 / スピッツ', id: '6003', title: 'インディゴ地平線', artist: 'スピッツ', album: 'インディゴ地平線' },
+      { value: 'ほうき星 / スピッツ', id: '6004', title: 'ほうき星', artist: 'スピッツ', album: 'インディゴ地平線' },
+      { value: 'みなと / スピッツ', id: '6005', title: 'みなと', artist: 'スピッツ', album: '醒めない' },
+      { value: 'Hi-Five / Superfly', id: '7001', title: 'Hi-Five', artist: 'Superfly', album: 'Superfly' },
+      { value: 'Alright!! / Superfly', id: '7002', title: 'Alright!!', artist: 'Superfly', album: 'Box Emotions' },
+      { value: '春のまぼろし / Superfly', id: '7003', title: '春のまぼろし', artist: 'Superfly', album: 'Box Emotions' }
+    ];
+    $('#input-title').autocomplete({
+      lookup: values,
+      onSelect: function (suggestion) {
+        $('#output-area').html('id: <b>' + suggestion.id + '</b> title: <b>' + suggestion.title + '</b> artist: <b>' + suggestion.artist + '</b> album: <b>' + suggestion.album + '</b>');
+      }
+    });
+  });
+  </script>
+</head>
+<body>
+
+  <input type="text" id="input-title" placeholder="タイトル" style="width:250px;">
+  <div id="output-area"></div>
+
+</body>
+</html>
