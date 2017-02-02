@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Examples</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/conditional.js"></script>
+</head>
+<body>
+
+  <div id="example1">
+    <!-- バインドした値がtrueならDOM要素を生成、falseなら破棄される -->
+    <!-- v-if　は遅延描画であり、条件が初めてtrueになるまで描画されない -->
+    <!-- v-show に比べて切り替えコストが高い -->
+    <p v-if="ok">Yes!</p>
+    <p v-else>No</p>
+  </div>
+
+  <!-- v-if はディレクティブのため単一の要素に付加する必要がある -->
+  <div id="example2">
+    <!-- 非表示ラッパーである template 要素を使用して複数の要素を切り替える -->
+    <template v-if="ok">
+      <div>Hello World!</div>
+      <div>message 1</div>
+      <div>message 2</div>
+    </template>
+  </div>
+
+  <div id="example3">
+    <!-- v-else-if は v2.1.0 以降-->
+    <p v-if="type === 'a'">A</p>
+    <p v-else-if="type === 'b'">B</p>
+    <p v-else-if="type === 'c'">C</p>
+    <p v-else>Default</p>
+  </div>
+
+  <div id="example4">
+    <!-- key 属性を持つ要素は切り替えるたびに再描画される -->
+    <!-- key 属性を持たない label 要素は再利用される -->
+    <template v-if="loginType === 'username'">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" key="username">
+    </template>
+    <template v-else>
+      <label for="email">Email</label>
+      <input type="text" id="email" placeholder="Enter your email address" key="email">
+    </template>
+    <div>
+      <button v-on:click="{{ toggle() }}">Toggle</button>
+    </div>
+  </div>
+
+  <div id="example5">
+    <!-- v-show を持つDOM要素は常に描画されており、CSS の display プロパティで切り替える -->
+    <!-- v-if に比べて初期描画コストが高い -->
+    <p v-show="ok">Show!</p>
+  </div>
+
+</body>
+</html>
