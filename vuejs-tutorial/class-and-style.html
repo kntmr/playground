@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Examples</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/class-and-style.js"></script>
+  <style media="screen">
+    .active {
+      font-weight: bold;
+    }
+    .text-danger {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="example1">
+    <p v-bind:class="{ active: isActive, 'text-danger': hasError }">class example 1</p>
+    <p v-bind:class="classObject">class example 2</p>
+  </div>
+
+  <div id="example2">
+    <p v-bind:class="[ activeClass, errorClass ]">class example 3</p>
+    <!--  三項演算子 / オブジェクト構文 -->
+    <p v-bind:class="[ isActive ? activeClass : '', { 'text-danger': hasError } ]">class example 4</p>
+  </div>
+
+  <div id="example3">
+    <p v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">style example 1</p>
+    <p v-bind:style="styleObject">style example 2</p>
+  </div>
+
+  <div id="example4">
+    <!-- 同じ要素に複数のスタイルオブジェクトを適用できる -->
+    <p v-bind:style="[ baseStyle, overridingStyle ]">style example 3</p>
+  </div>
+
+</body>
+</html>
