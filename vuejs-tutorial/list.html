@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Examples</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/list.js"></script>
+</head>
+<body>
+
+  <div id="example1">
+    <ul>
+      <li v-for="item in items">
+        {{ item.message }}
+      </li>
+    </ul>
+  </div>
+
+  <div id="example2">
+    <!-- 親スコープのプロパティをアクセスできる -->
+    <!-- v-for の第2引数でインデックスを取得できる -->
+    <!-- in の代わりに of が使用可 -->
+    <ul>
+      <li v-for="(item, index) of items">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+      </li>
+    </ul>
+  </div>
+
+  <div id="example3">
+    <!-- 複数の要素を繰り返す場合は非表示ラッパーである template を使用する -->
+    <ul>
+      <template v-for="item in items">
+        <li>{{ item.message }}</li>
+        <span>{{ item.description }}</span>
+      </template>
+    </ul>
+  </div>
+
+  <div id="example4">
+    <ul>
+      <!-- オブジェクトをプロパティを反復処理できる -->
+      <!-- 第2引数でプロティ名を取得できる -->
+      <!-- オブジェクトの反復処理は Object.keys() の列挙順に基づく (順序はJSエンジンごとに保証されない) -->
+      <li v-for="(value, key) in object">
+        {{ key }} : {{ value }}
+      </li>
+    </ul>
+  </div>
+
+  <div id="example5">
+    <!-- 指定回数の繰り返し -->
+    <span v-for="n in 10">{{ n }}</span>
+  </div>
+
+  <div id="example6">
+    <ul>
+      <!-- v-for は v-if より優先される (v-if はくり返しごとに処理される) -->
+      <li v-for="todo in todos" v-if="!todo.isComplete">
+        {{ todo.text }}
+      </li>
+    </ul>
+  </div>
+
+  <div id="example7">
+    <ul>
+      <li v-for="n in evenNumbers">{{ n }}</li>
+    </ul>
+  </div>
+
+  <div id="example8">
+    <ul>
+      <li v-for="n in even(numbers)">{{ n }}</li>
+    </ul>
+  </div>
+
+</body>
+</html>
