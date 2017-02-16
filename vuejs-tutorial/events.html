@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Examples</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/events.js"></script>
+</head>
+<body>
+
+  <div id="example1">
+    <!-- v-on ディレクティブで JavaScript の実行が可能 -->
+    <button v-on:click="counter += 1">Count Up</button>
+    <p>The button above has been clicked {{ counter }} times.</p>
+  </div>
+
+  <div id="example2">
+    <!-- メソッド名を指定 -->
+    <button v-on:click="greet">Greet!</button>
+    <!-- インライン JavaScript -->
+    <button v-on:click="say('Yo!')">Say!</button>
+    <!-- $event 変数はオリジナルのDOMイベントを参照する特別な変数 -->
+    <button v-on:click="warn('Form cannot be submitted yet.', $event)">Submit!</button>
+  </div>
+
+  <div id="example3">
+    <!-- event.preventDefault や event.stopPropagation の代わりに v-on でイベント修飾子を使う -->
+    <!-- イベント修飾子 : .stop .prevent .capture .self .once -->
+    <button v-on:click.once="doOnce">Once</button>
+  </div>
+
+  <div id="example4">
+    <!-- enter がクリックされたときのみ submit が呼ばれる -->
+    <!-- キー修飾子 : .enter .tab .delete .esc .space .up .down .left .right .ctrl .alt .shift .meta -->
+    <input type="text" v-on:keyup.enter="submit">
+    <!-- 省略記法 -->
+    <input type="text" @keyup.enter="submit">
+  </div>
+
+</body>
+</html>
