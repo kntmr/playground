@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js Examples</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/forms.js"></script>
+</head>
+<body>
+
+  <div id="example1">
+    <!-- value による初期値は反映されない (Vueインスタンスを参照する) -->
+    <input type="text" v-model="message" placeholder="Input Text">
+    <span>Message is : {{ message }}</span>
+  </div>
+
+  <div id="example2">
+    <!-- <textarea>{{ message }}</textarea> は使えない (v-model を使う) -->
+    <span>Message is :</span>
+    <div style="white-space:pre;">{{ message }}</div>
+    <textarea v-model="message"></textarea>
+  </div>
+
+  <div id="example3">
+    <!-- 単体のチェックボックスは boolean 値が入る -->
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <span>{{ checked }}</span>
+  </div>
+
+  <div id="example4">
+    <!-- 複数のチェックボックスは配列にバインドされる -->
+    <!-- Vueインスタンスのデータを配列ではなく文字列にすると boolean 値が入る -->
+    <input type="checkbox" id="foo" value="Foo" v-model="checkboxes">
+    <label for="foo">Foo</label>
+    <input type="checkbox" id="bar" value="Bar" v-model="checkboxes">
+    <label for="bar">Bar</label>
+    <input type="checkbox" id="baz" value="Baz" v-model="checkboxes">
+    <label for="baz">Baz</label>
+    <br>
+    <span>Checked : {{ checkboxes }}</span>
+  </div>
+
+  <div id="example5">
+    <!-- ラジオボタンは選択した value の値が入る -->
+    <input type="radio" id="one" value="One" v-model="picked">
+    <label for="one">One</label>
+    <input type="radio" id="two" value="Two" v-model="picked">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked : {{ picked }}</span>
+  </div>
+
+  <div id="example6">
+    <!-- プルダウンは選択した value が入る (value がなければ値そのものが入る) -->
+    <select v-model="selected">
+      <option value="a">A</option>
+      <option value="b">B</option>
+      <option value="c">C</option>
+      <br>
+    </select>
+    <span>Selected : {{ selected }}</span>
+  </div>
+
+  <div id="example7">
+    <!-- 複数選択の場合は配列にバインドする -->
+    <select v-model="selected" multiple>
+      <option value="a">A</option>
+      <option value="b">B</option>
+      <option value="c">C</option>
+    </select>
+    <br>
+    <span>Selected : {{ selected }}</span>
+  </div>
+
+  <div id="example8">
+    <!-- プルダウンの中身を動的に表示する場合は v-for を使う -->
+    <select v-model="selected">
+      <option v-for="option in options" v-bind:value="option.value">
+        {{ option.text }}
+      </option>
+    </select>
+    <br>
+    <span>Selected : {{ selected }}</span>
+  </div>
+
+  <!-- Vueインスタンスで動的プロパティに値を束縛する -->
+  <div id="example9">
+    <!-- チェックしたときは vm.a の値が toggle に入り、チェックを外すと vm.b の値がtoggle に入る -->
+    <input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+    <span>Checked value : {{ toggle }}</span>
+    <br>
+    <!-- 選択すると vm.c の値が pick に入る -->
+    <input type="radio" v-model="pick" v-bind:value="c">
+    <span>Picked value : {{ pick }}</span>
+    <br>
+    <!-- vm.selected.number に値が入る -->
+    <select v-model="selected">
+      <!-- インラインオブジェクトリテラル -->
+      <option v-bind:value="{ number: 12345 }">123</option>
+    </select>
+  </div>
+
+  <div id="example10">
+    <!-- .lazy を付けると input 要素からフォーカスが外れたときにデータが同期される -->
+    <input type="text" v-model.lazy="msg">
+    <span>Lazy msg : {{ msg }}</span>
+    <br>
+    <input type="number" v-model.number="age">
+    <span>Number : {{ age }}</span>
+    <br>
+    <!-- 全角半角スペースを trim する (input 要素内のデータも trim する) -->
+    <input type="text" v-model.trim="trimed">
+    <span>Trimed : {{ trimed }}</span>
+  </div>
+
+</body>
+</html>
