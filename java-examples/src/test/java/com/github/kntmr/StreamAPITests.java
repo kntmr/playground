@@ -138,4 +138,26 @@ public class StreamAPITests {
         System.out.println(stream.collect(Collectors.partitioningBy(s -> s.contains("a"))));
     }
 
+    @Test
+    public void test09() {
+        List<List<List<String>>> list = Arrays.asList(
+                Arrays.asList(
+                        Arrays.asList("A", "B"),
+                        Arrays.asList("C", "D", "E"),
+                        Arrays.asList("F")
+                ),
+                Arrays.asList(
+                        Arrays.asList("e", "a", "d"),
+                        Arrays.asList("c", "f")
+                )
+        );
+        list.stream() // => List<List<List<String>>>
+                .flatMap(Collection::stream) // => List<List<String>>
+                .filter(l -> l.size() > 2)
+                .flatMap(Collection::stream) // => List<String>
+                .map(String::toLowerCase)
+                .distinct()
+                .forEach(System.out::print);
+    }
+
 }
