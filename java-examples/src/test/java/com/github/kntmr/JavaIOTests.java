@@ -46,4 +46,37 @@ public class JavaIOTests {
         }
     }
 
+    static class Monitor implements AutoCloseable {
+        @Override
+        public void close() throws Exception {
+            System.out.println("Monitor closed.");
+        }
+        void monitor() throws Exception {
+            System.out.println("Monitoring...");
+            throw new Exception("Unable to monitor");
+        }
+    }
+
+    static class Filter implements AutoCloseable {
+        @Override
+        public void close() throws Exception {
+            System.out.println("Filter closed.");
+        }
+        void filter() {
+            System.out.println("Filtering...");
+        }
+    }
+
+    @Test
+    public void test04() {
+        try (Monitor m = new Monitor();
+             Filter f = new Filter()) {
+            m.monitor(); // ここで例外がスローされる
+            f.filter();
+        } catch (Exception e) {
+            // catch に入る前に close が呼ばれる
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
