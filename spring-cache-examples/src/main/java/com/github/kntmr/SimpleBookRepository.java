@@ -1,10 +1,12 @@
 package com.github.kntmr;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SimpleBookRepository implements BookRepository {
 
+    @Cacheable("books")
     @Override
     public Book getByIsbn(String isbn) {
         doDummy();
