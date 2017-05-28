@@ -9,13 +9,13 @@ public abstract class AbstractService {
     @Autowired
     protected CustomerDao customerDao;
 
-    public List<String> findAll() {
-        return customerDao.findAll();
+    //@Transactional // => no rollback
+    public void register(String... names) {
+        customerDao.insert(names);
     }
 
-    //@Transactional
-    public void insert(String... names) {
-        customerDao.insert(names);
+    public List<String> findAll() {
+        return customerDao.findAll();
     }
 
 }

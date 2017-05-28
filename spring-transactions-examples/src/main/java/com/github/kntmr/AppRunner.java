@@ -2,6 +2,7 @@ package com.github.kntmr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -19,23 +20,75 @@ public class AppRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
+        //executeInterface();
+        executeAbstract();
+        //executeConcrete();
+    }
 
-        AbstractService service = (AbstractService) applicationContext.getBean("customerService");
-        //CustomerService service = (CustomerService) applicationContext.getBean("customerService");
+    @Autowired
+    BaseService baseService;
 
-        service.insert("foo", "bar", "baz");
+    void executeInterface() {
+        logger.info("Call executeInterface()");
 
-        for (String name : service.findAll()) {
+        baseService.register("foo", "bar", "buz");
+        for (String name : baseService.findAll()) {
             logger.info("--> " + name);
         }
 
         try {
-            service.insert("hoge", null);
+            baseService.register("xxxx", null);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
 
-        for (String name : service.findAll()) {
+        for (String name : baseService.findAll()) {
+            logger.info("--> " + name);
+        }
+    }
+
+    @Autowired
+    AbstractService abstractService;
+
+    void executeAbstract() {
+        logger.info("Call executeAbstract()");
+
+        abstractService.register("foo", "bar", "buz");
+
+        for (String name : abstractService.findAll()) {
+            logger.info("--> " + name);
+        }
+
+        try {
+            abstractService.register("xxxx", null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+        for (String name : abstractService.findAll()) {
+            logger.info("--> " + name);
+        }
+    }
+
+    @Autowired
+    CustomerService concreteService;
+
+    void executeConcrete() {
+        logger.info("Call executeConcrete()");
+
+        concreteService.register("foo", "bar", "buz");
+
+        for (String name : concreteService.findAll()) {
+            logger.info("--> " + name);
+        }
+
+        try {
+            concreteService.register("xxxx", null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+        for (String name : concreteService.findAll()) {
             logger.info("--> " + name);
         }
     }

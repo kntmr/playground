@@ -7,16 +7,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-public class CustomerService {
+public class BaseServiceImpl implements BaseService {
 
     @Autowired
     protected CustomerDao customerDao;
 
     @Transactional // => rollback
+    @Override
     public void register(String... names) {
         customerDao.insert(names);
     }
 
+    @Override
     public List<String> findAll() {
         return customerDao.findAll();
     }
