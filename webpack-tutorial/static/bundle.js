@@ -70,13 +70,19 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-var cats = ['foo', 'bar', 'buz'];
-module.exports = cats;
+module.exports = {
+	"cats": [
+		"foo",
+		"bar",
+		"buz"
+	]
+};
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+//var cats = require('./cats.js');
 var cats = __webpack_require__(0);
 console.log(cats);
 
