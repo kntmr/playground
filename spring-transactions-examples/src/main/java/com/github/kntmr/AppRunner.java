@@ -20,8 +20,8 @@ public class AppRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        //executeInterface();
-        executeAbstract();
+        executeInterface();
+        //executeAbstract();
         //executeConcrete();
     }
 
@@ -29,7 +29,7 @@ public class AppRunner implements CommandLineRunner {
     BaseService baseService;
 
     void executeInterface() {
-        logger.info("Call executeInterface()");
+        logger.info("Call executeInterface() ...");
 
         baseService.register("foo", "bar", "buz");
         for (String name : baseService.findAll()) {
@@ -51,7 +51,7 @@ public class AppRunner implements CommandLineRunner {
     AbstractService abstractService;
 
     void executeAbstract() {
-        logger.info("Call executeAbstract()");
+        logger.info("Call executeAbstract() ...");
 
         abstractService.register("foo", "bar", "buz");
 
@@ -74,7 +74,7 @@ public class AppRunner implements CommandLineRunner {
     CustomerService concreteService;
 
     void executeConcrete() {
-        logger.info("Call executeConcrete()");
+        logger.info("Call executeConcrete() ...");
 
         concreteService.register("foo", "bar", "buz");
 
