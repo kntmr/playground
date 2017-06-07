@@ -74,7 +74,8 @@ module.exports = {
 	"cats": [
 		"foo",
 		"bar",
-		"buz"
+		"buz",
+		"yaml"
 	]
 };
 
@@ -83,6 +84,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 //var cats = require('./cats.js');
+//var cats = require('json-loader!./cats.json');
 var cats = __webpack_require__(0);
 console.log(cats);
 
