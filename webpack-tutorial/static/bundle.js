@@ -86,6 +86,7 @@ module.exports = {
 //var cats = require('./cats.js');
 //var cats = require('json-loader!./cats.json');
 //var cats = require('json-loader!yaml-loader!./cats.yml');
+//var cats = require('./cats.yml');
 var cats = __webpack_require__(0);
 console.log(cats);
 
