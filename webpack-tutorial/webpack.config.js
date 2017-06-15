@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+var htmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 module.exports = {
   entry: './src/main.js',
@@ -12,5 +14,9 @@ module.exports = {
     loaders: [
       { test: /\.yml$/, loader: 'json-loader!yaml-loader' }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new htmlWebpackPlugin({ title: 'Sample Page' })
+  ]
 }
