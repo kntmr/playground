@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <title>selenide-examples</title>
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $('#input').on('keypress', function(e) {
+                if (e.which === 13) {
+                    $.post('echo', { input: $('#input').val() })
+                        .then(function(response) {
+                            $('#output').text(response);
+                        });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <h2>Selenide Examples</h2>
+    <p>
+        <input type="text" name="input" id="input" />
+    </p>
+    <p>
+        <span id="output"></span>
+    </p>
+
+</body>
+</html>
