@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.Assert.assertEquals;
 
 public class Tests {
 
@@ -38,8 +39,7 @@ public class Tests {
     public void test003() {
         IndexPage page = open("http://localhost:8080/", IndexPage.class);
         page.echo("buz");
-        System.out.println(page.output());
-        org.junit.Assert.assertEquals("＼buz／", page.output());
+        assertEquals("＼buz／", page.output());
 
         screenshot("screenshot003");
     }

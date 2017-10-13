@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class IndexPage {
 
@@ -17,7 +18,7 @@ public class IndexPage {
     // Page Object (recommended)
     IndexPage echo(String val) {
         $(By.name("input")).val(val).pressEnter();
-        return this;
+        return page(IndexPage.class);
     }
     String output() {
         return $("#output").text();
