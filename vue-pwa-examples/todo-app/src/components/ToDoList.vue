@@ -3,9 +3,9 @@
     <input type="text" placeholder="todo" autofocus v-model="internal" @keyup.enter="addToDo">
     <ul>
       <li v-for="todo in todos">
-        <input type="checkbox" v-model="todo.completed">
+        <input type="checkbox" :checked="todo.completed" @change="changeCompleted(todo)">
         <label :class="{ completed: todo.completed }">{{ todo.content }}</label>
-        <button @click="remove(todo)">x</button>
+        <button @click="removeToDo(todo)">x</button>
       </li>
     </ul>
   </div>
@@ -16,12 +16,12 @@ export default {
   name: 'ToDoList',
   data () {
     return {
-      todos: [
-        { content: 'aaa', completed: false },
-        { content: 'bbb', completed: false },
-        { content: 'ccc', completed: false }
-      ],
       internal: ''
+    }
+  },
+  computed: {
+    todos () {
+      return this.$store.state.todos
     }
   },
   methods: {
@@ -30,15 +30,14 @@ export default {
       if (!val) {
         return
       }
-      this.todos.push({ content: val, completed: false })
+      this.$store.commit('addToDo', { content: val, completed: false })
       this.internal = ''
     },
-    remove (todo) {
-      const index = this.todos.indexOf(todo)
-      if (index < 0) {
-        return
-      }
-      this.todos.splice(index, 1)
+    removeToDo (todo) {
+      this.$store.commit('removeToDo', todo)
+    },
+    changeCompleted (todo) {
+      this.$store.commit('changeCompleted', todo)
     }
   }
 }
