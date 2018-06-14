@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from 'firebase/app'
+import 'firebase/database'
 
 Vue.use(Vuex)
 
@@ -7,29 +9,31 @@ const STORAGE_KEY = 'vue-todo-app'
 
 export default new Vuex.Store({
   state: {
-    todos: JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]')
+    todos: {}
   },
   mutations: {
+    initialize (state, todos) {
+      console.log('initializing ...')
+      if (todos !== null) {
+        state.todos = todos
+      }
+    },
     addToDo (state, todo) {
-      state.todos.push(todo)
+      const newKey = firebase.database().ref('todos').push().key
+      todo.id = newKey
+      Vue.set(state.todos, newKey, todo)
+      firebase.database().ref('todos/' + newKey).set(todo)
     },
     removeToDo (state, todo) {
-      const index = state.todos.indexOf(todo)
-      if (index < 0) {
-        return
-      }
-      state.todos.splice(index, 1)
+      const id = todo.id
+      Vue.delete(state.todos, todo.id)
+      firebase.database().ref('todos/' + id).remove()
     },
     changeCompleted (state, todo) {
       todo.completed = !todo.completed
+      const id = todo.id
+      firebase.database().ref('todos/' + id).set(todo)
     }
   },
-  plugins: [
-    store => {
-      store.subscribe((mutations, state) => {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.todos))
-      })
-    }
-  ],
   strict: process.env.NODE_ENV !== 'production'
 })

@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/database'
 export default {
   name: 'ToDoList',
   data () {
@@ -39,6 +41,11 @@ export default {
     changeCompleted (todo) {
       this.$store.commit('changeCompleted', todo)
     }
+  },
+  created () {
+    firebase.database().ref('todos').once('value').then(snapshot => {
+      this.$store.commit('initialize', snapshot.val())
+    })
   }
 }
 </script>
