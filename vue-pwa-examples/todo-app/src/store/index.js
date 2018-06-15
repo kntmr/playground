@@ -17,6 +17,24 @@ export default new Vuex.Store({
       if (todos !== null) {
         state.todos = todos
       }
+      firebase.database().ref('todos').on('child_added', data => {
+        this.commit('_addToDo', data)
+      })
+      firebase.database().ref('todos').on('child_removed', data => {
+        this.commit('_removeToDo', data)
+      })
+      firebase.database().ref('todos').on('child_changed', data => {
+        this.commit('_changeCompleted', data)
+      })
+    },
+    _addToDo (state, data) {
+      Vue.set(state.todos, data.key, data.val())
+    },
+    _removeToDo (state, data) {
+      Vue.delete(state.todos, data.key)
+    },
+    _changeCompleted (state, data) {
+      Vue.set(state.todos, data.key, data.val())
     },
     addToDo (state, todo) {
       const newKey = firebase.database().ref('todos').push().key
