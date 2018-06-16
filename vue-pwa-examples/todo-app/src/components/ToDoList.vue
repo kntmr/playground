@@ -2,7 +2,7 @@
   <div>
     <input type="text" placeholder="todo" autofocus v-model="internal" @keyup.enter="addToDo">
     <ul>
-      <li v-for="todo in todos">
+      <li v-for="todo in todos" :key="todo.key">
         <input type="checkbox" :checked="todo.completed" @change="changeCompleted(todo)">
         <label :class="{ completed: todo.completed }">{{ todo.content }}</label>
         <button @click="removeToDo(todo)">x</button>
