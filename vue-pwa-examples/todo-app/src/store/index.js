@@ -17,40 +17,48 @@ export default new Vuex.Store({
       if (todos !== null) {
         state.todos = todos
       }
+      // callback
       firebase.database().ref('todos').on('child_added', data => {
-        this.commit('_addToDo', data)
+        const todo = data.val()
+        todo.id = data.key
+        this.commit('_addToDo', todo)
       })
       firebase.database().ref('todos').on('child_removed', data => {
-        this.commit('_removeToDo', data)
+        const todo = data.val()
+        todo.id = data.key
+        this.commit('_removeToDo', todo)
       })
       firebase.database().ref('todos').on('child_changed', data => {
-        this.commit('_changeCompleted', data)
+        const todo = data.val()
+        todo.id = data.key
+        this.commit('_changeCompleted', todo)
       })
-    },
-    _addToDo (state, data) {
-      Vue.set(state.todos, data.key, data.val())
-    },
-    _removeToDo (state, data) {
-      Vue.delete(state.todos, data.key)
-    },
-    _changeCompleted (state, data) {
-      Vue.set(state.todos, data.key, data.val())
     },
     addToDo (state, todo) {
       const newKey = firebase.database().ref('todos').push().key
       todo.id = newKey
-      Vue.set(state.todos, newKey, todo)
       firebase.database().ref('todos/' + newKey).set(todo)
+      this.commit('_addToDo', todo)
     },
     removeToDo (state, todo) {
       const id = todo.id
-      Vue.delete(state.todos, todo.id)
       firebase.database().ref('todos/' + id).remove()
+      this.commit('_removeToDo', todo)
     },
     changeCompleted (state, todo) {
       todo.completed = !todo.completed
       const id = todo.id
       firebase.database().ref('todos/' + id).set(todo)
+      this.commit('_changeCompleted', todo)
+    },
+    _addToDo (state, todo) {
+      Vue.set(state.todos, todo.id, todo)
+    },
+    _removeToDo (state, todo) {
+      Vue.delete(state.todos, todo.id)
+    },
+    _changeCompleted (state, todo) {
+      Vue.set(state.todos, todo.id, todo)
     }
   },
   strict: process.env.NODE_ENV !== 'production'
