@@ -2,7 +2,7 @@
   <div>
     <input type="text" placeholder="todo" autofocus v-model="internal" @keyup.enter="addToDo">
     <ul>
-      <li v-for="todo in todos">
+      <li v-for="todo in todos" :key="todo.key">
         <input type="checkbox" :checked="todo.completed" @change="changeCompleted(todo)">
         <label :class="{ completed: todo.completed }">{{ todo.content }}</label>
         <button @click="removeToDo(todo)">x</button>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/database'
 export default {
   name: 'ToDoList',
   data () {
@@ -39,6 +41,11 @@ export default {
     changeCompleted (todo) {
       this.$store.commit('changeCompleted', todo)
     }
+  },
+  created () {
+    firebase.database().ref('todos').once('value').then(snapshot => {
+      this.$store.commit('initialize', snapshot.val())
+    })
   }
 }
 </script>
