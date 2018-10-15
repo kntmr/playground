@@ -1,0 +1,21 @@
+type Group {
+    id: ID!
+    name: String!
+}
+
+type User {
+    id: ID!
+    name: String!
+    group: Group!
+    todos: [ToDo]
+}
+
+type ToDo {
+    id: ID!
+    content: String!
+    completed: Boolean!
+}
+
+type Query {
+    getUser(id: ID!): User
+}
