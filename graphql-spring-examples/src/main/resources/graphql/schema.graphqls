@@ -19,3 +19,13 @@ type ToDo {
 type Query {
     getUser(id: ID!): User
 }
+
+input _ToDo {
+    content: String!
+    completed: Boolean!
+    userId: ID!
+}
+
+type Mutation {
+    add(todo: _ToDo): [ToDo]
+}

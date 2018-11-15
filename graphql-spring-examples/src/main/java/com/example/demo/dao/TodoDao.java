@@ -1,11 +1,13 @@
 package com.example.demo.dao;
 
-import com.example.demo.type.ToDo;
-import org.springframework.stereotype.Component;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
+import com.example.demo.type.ToDo;
 
 @Component
 public class TodoDao {
@@ -22,6 +24,13 @@ public class TodoDao {
 
     public List<ToDo> findByUser(int id) {
         return todos.stream().filter(t -> t.getUserId() == id).collect(Collectors.toList());
+    }
+
+    public List<ToDo> add(ToDo todo) {
+    	List<ToDo> _todos = new ArrayList<>(todos);
+    	_todos.add(todo);
+    	todos = Arrays.asList(_todos.toArray(new ToDo[_todos.size()]));
+    	return findByUser(todo.getUserId());
     }
 
 }
