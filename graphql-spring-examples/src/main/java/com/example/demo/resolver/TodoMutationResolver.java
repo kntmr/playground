@@ -19,7 +19,7 @@ public class TodoMutationResolver implements GraphQLMutationResolver {
 	}
 	
 	public List<ToDo> add(_ToDo _todo) {
-		List<ToDo> current = todoDao.findByUser(_todo.getUserId());
+		List<ToDo> current = todoDao.findAll();
 		return todoDao.add(new ToDo(current.size(), _todo.getContent(), _todo.isCompleted(), _todo.getUserId()));
 	}
 

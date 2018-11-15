@@ -22,6 +22,10 @@ public class TodoDao {
             new ToDo(7, "user b1 task1", false, 4)
     );
 
+    public List<ToDo> findAll() {
+        return todos;
+    }
+
     public List<ToDo> findByUser(int id) {
         return todos.stream().filter(t -> t.getUserId() == id).collect(Collectors.toList());
     }
