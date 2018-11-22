@@ -29,3 +29,7 @@ input _ToDo {
 type Mutation {
     add(todo: _ToDo): [ToDo]
 }
+
+type Subscription {
+    added: ToDo
+}

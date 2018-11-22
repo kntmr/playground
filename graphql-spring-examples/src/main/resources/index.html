@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GraphQL Subscriptions Example</title>
+  <script>
+    fetch('http://localhost:8080/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({query: '{getUser(id: 1) {id,name,group {id,name},todos {id,content,completed}}}'})
+    })
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+
+    const ws = new WebSocket('ws://localhost:8080/subscriptions')
+    ws.onopen = (event) => {
+      console.log('ws opened.')
+      ws.send(JSON.stringify({query: 'subscription{added{id,content,completed}}'}));
+    }
+    ws.onmessage = (event) => {
+      var data = event.data;
+      console.log('ws message: ' + data)
+    }
+    ws.onclose = (e) => {
+      console.log('ws closed.')
+      ws.close();
+    }
+    ws.onerror = (e) => {
+      console.log('error!!')
+      ws.close();
+    }
+  </script>
+</head>
+<body>
+
+</body>
+</html>

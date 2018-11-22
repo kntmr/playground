@@ -30,11 +30,10 @@ public class TodoDao {
         return todos.stream().filter(t -> t.getUserId() == id).collect(Collectors.toList());
     }
 
-    public List<ToDo> add(ToDo todo) {
+    public void add(ToDo todo) {
     	List<ToDo> _todos = new ArrayList<>(todos);
     	_todos.add(todo);
     	todos = Arrays.asList(_todos.toArray(new ToDo[_todos.size()]));
-    	return findByUser(todo.getUserId());
     }
 
 }
