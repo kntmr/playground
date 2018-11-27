@@ -5,25 +5,66 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>GraphQL Subscriptions Example</title>
   <script>
+    const renderTodo = todo => {
+      const div = document.createElement('div')
+      div.innerHTML = `<span>id=${todo.id}, content=${todo.content}, completed=${todo.completed}</span>`
+      document.getElementById('container').appendChild(div)
+    }
+    const renderUser = user => {
+      // User
+      const div = document.createElement('div')
+      div.innerHTML = `id=${user.id}, name=${user.name} (Group: id=${user.group.id}, name=${user.group.name})`
+      document.getElementById('container').appendChild(div)
+      // ToDo
+      user.todos.forEach(todo => {
+        renderTodo(todo)
+      });
+    }
+
     fetch('http://localhost:8080/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({query: '{getUser(id: 1) {id,name,group {id,name},todos {id,content,completed}}}'})
+      body: JSON.stringify({
+        query: `{
+          getUser(id: 1) {
+            id,
+            name,
+            group {
+              id,
+              name
+            },
+            todos {
+              id,
+              content,
+              completed
+            }
+          }
+        }`
+      })
     })
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(resp => renderUser(resp.data.getUser))
 
     const ws = new WebSocket('ws://localhost:8080/subscriptions')
     ws.onopen = (event) => {
       console.log('ws opened.')
-      ws.send(JSON.stringify({query: 'subscription{added{id,content,completed}}'}));
+      ws.send(JSON.stringify({
+        query: `subscription {
+          added {
+            id,
+            content,
+            completed
+          }
+        }`
+      }));
     }
     ws.onmessage = (event) => {
-      var data = event.data;
-      console.log('ws message: ' + data)
+      console.log('ws message.')
+      var resp = JSON.parse(event.data);
+      renderTodo(resp.data.added)
     }
     ws.onclose = (e) => {
       console.log('ws closed.')
@@ -36,6 +77,7 @@
   </script>
 </head>
 <body>
-
+  <h2>ToDo List</h2>
+  <div id="container"></div>
 </body>
 </html>
