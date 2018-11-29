@@ -31,5 +31,5 @@ type Mutation {
 }
 
 type Subscription {
-    added: ToDo
+    added(id: ID!): ToDo
 }

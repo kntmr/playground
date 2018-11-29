@@ -29,7 +29,7 @@
       },
       body: JSON.stringify({
         query: `{
-          getUser(id: 1) {
+          getUser(id: 2) {
             id,
             name,
             group {
@@ -53,7 +53,7 @@
       console.log('ws opened.')
       ws.send(JSON.stringify({
         query: `subscription {
-          added(id: 1) {
+          added(id: 2) {
             id,
             content,
             completed

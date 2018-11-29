@@ -16,8 +16,8 @@ public class TodoSubscriptionResolver implements GraphQLSubscriptionResolver {
 		this.processor = processor;
 	}
 
-	public Publisher<ToDo> added() {
-		return processor.getProcessor().log();
+	public Publisher<ToDo> added(int id) {
+		return processor.getProcessor().filter(todo -> todo.getUserId() == id);
 	}
 
 }
