@@ -13,7 +13,7 @@
     const renderUser = user => {
       // User
       const div = document.createElement('div')
-      div.innerHTML = `id=${user.id}, name=${user.name} (Group: id=${user.group.id}, name=${user.group.name})`
+      div.innerHTML = `(Group: id=${user.group.id}, name=${user.group.name}) id=${user.id}, name=${user.name}`
       document.getElementById('container').appendChild(div)
       // ToDo
       user.todos.forEach(todo => {
