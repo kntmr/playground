@@ -9,18 +9,18 @@ import reactor.core.publisher.EmitterProcessor;
 @Component
 public class TodoEmitterProcessor {
 
-	private EmitterProcessor<ToDo> processor;
+    private EmitterProcessor<ToDo> processor;
 
-	public TodoEmitterProcessor() {
-		processor = EmitterProcessor.create();
-	}
+    public TodoEmitterProcessor() {
+        processor = EmitterProcessor.create();
+    }
 
-	public EmitterProcessor<ToDo> getProcessor() {
-		return processor;
-	}
+    public EmitterProcessor<ToDo> getProcessor() {
+        return processor;
+    }
 
-	public void sendMessage(ToDo todo) {
-		processor.onNext(todo);
-	}
+    public void sendMessage(ToDo todo) {
+        processor.onNext(todo);
+    }
 
 }

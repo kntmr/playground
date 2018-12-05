@@ -13,13 +13,13 @@ import com.example.demo.type.ToDo;
 public class TodoDao {
 
     private List<ToDo> todos = Arrays.asList(
-            new ToDo(1, "user a1 task1", false, 1),
-            new ToDo(2, "user a1 task2", false, 1),
-            new ToDo(3, "user a1 task3", false, 1),
-            new ToDo(4, "user a2 task1", false, 2),
-            new ToDo(5, "user a2 task2", false, 2),
-            new ToDo(6, "user a3 task1", false, 3),
-            new ToDo(7, "user b1 task1", false, 4)
+            new ToDo(1, "user1's content1", false, 1),
+            new ToDo(2, "user1's content2", false, 1),
+            new ToDo(3, "user1's content3", false, 1),
+            new ToDo(4, "user2's content1", false, 2),
+            new ToDo(5, "user2's content2", false, 2),
+            new ToDo(6, "user3's content1", false, 3),
+            new ToDo(7, "user4's content1", false, 4)
     );
 
     public List<ToDo> findAll() {
@@ -31,9 +31,9 @@ public class TodoDao {
     }
 
     public void add(ToDo todo) {
-    	List<ToDo> _todos = new ArrayList<>(todos);
-    	_todos.add(todo);
-    	todos = Arrays.asList(_todos.toArray(new ToDo[_todos.size()]));
+        List<ToDo> _todos = new ArrayList<>(todos);
+        _todos.add(todo);
+        todos = Arrays.asList(_todos.toArray(new ToDo[_todos.size()]));
     }
 
 }

@@ -10,14 +10,14 @@ import com.example.demo.type.ToDo;
 @Component
 public class TodoSubscriptionResolver implements GraphQLSubscriptionResolver {
 
-	private TodoEmitterProcessor processor;
+    private TodoEmitterProcessor processor;
 
-	public TodoSubscriptionResolver(TodoEmitterProcessor processor) {
-		this.processor = processor;
-	}
+    public TodoSubscriptionResolver(TodoEmitterProcessor processor) {
+        this.processor = processor;
+    }
 
-	public Publisher<ToDo> added(int id) {
-		return processor.getProcessor().filter(todo -> todo.getUserId() == id);
-	}
+    public Publisher<ToDo> added(int id) {
+        return processor.getProcessor().filter(todo -> todo.getUserId() == id);
+    }
 
 }
