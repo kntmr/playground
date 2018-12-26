@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <style>
+	<!--
+	table {
+       border: solid 1px red
+    }
+	table td {
+	   border: solid 1px blue
+	}
+	-->
+	</style>
+</head>
+<body>
+
+    <h4>Spring WebFlux & Thymeleaf</h4>
+    <table>
+        <tbody>
+            <tr th:each="u : ${users}">
+                <td th:text="user + ${u.id}"></td>
+                <td th:text="${u.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
