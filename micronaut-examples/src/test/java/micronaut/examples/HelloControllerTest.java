@@ -20,4 +20,13 @@ public class HelloControllerTest {
         }
     }
 
+    @Test
+    public void testIndex2() throws Exception {
+        try(EmbeddedServer server = ApplicationContext.run(EmbeddedServer.class)) {
+            try(RxHttpClient client = server.getApplicationContext().createBean(RxHttpClient.class, server.getURL())) {
+                assertEquals("Hello Micronaut", client.toBlocking().exchange("/hello2", String.class).body());
+            }
+        }
+    }
+
 }
