@@ -49,6 +49,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'https://nuxt-blog-service-bcc9e.firebaseio.com'
   },
   /*
   ** Build configuration
