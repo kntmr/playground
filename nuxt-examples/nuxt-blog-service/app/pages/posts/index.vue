@@ -24,8 +24,9 @@ export default {
     ...mapGetters('posts', [ 'posts' ]),
     showPosts () {
       return this.posts.map(post => {
-        post.created_at = moment(post.created_at).format('YYYY/MM/DD HH:mm:ss')
-        return post
+        const copied = Object.assign({}, post)
+        copied.created_at = moment(post.created_at).format('YYYY/MM/DD HH:mm:ss')
+        return copied
       })
     }
   },

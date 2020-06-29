@@ -5,7 +5,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  posts: state => state.posts.map(post => Object.assign({}, post))
+  posts: state => state.posts
 }
 
 export const mutations = {
