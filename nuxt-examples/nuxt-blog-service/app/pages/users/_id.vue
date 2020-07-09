@@ -21,6 +21,15 @@
             <el-table-column prop="created_at" label="投稿日時" witdh="160"></el-table-column>
           </el-table>
         </el-card>
+        <el-card>
+          <div slot="header" class="clearfix">
+            <span>{{ user.id }} さんがいいねした投稿</span>
+          </div>
+          <el-table :data="userLikePosts" style="width:100%;" class="table">
+            <el-table-column prop="post.title" label="タイトル" />
+            <el-table-column prop="post.user_id" label="投稿者" witdh="160"></el-table-column>
+          </el-table>
+        </el-card>
       </el-col>
     </el-row>
   </div>
@@ -47,12 +56,20 @@ export default {
         return { id, ...copied }
       })
     },
+    userLikePosts () {
+      if (!this.user.likes.length) {
+        return []
+      }
+      return Object.entries(this.user.likes).reverse().map(([id, like]) => {
+        return { ...like }
+      })
+    },
     user () {
       const user = this.users.find(u => u.id === this.$route.params.id)
       if (!user) {
         return null
       }
-      return Object.assign({ posts: [] }, user)
+      return Object.assign({ posts: [], likes: [] }, user)
     }
   }
 }

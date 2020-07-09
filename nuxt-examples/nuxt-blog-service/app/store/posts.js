@@ -71,7 +71,11 @@ export const actions = {
     post.likes.push({
       created_at: moment().format(),
       user_id: user.id,
-      post_id: post.id
+      post: {
+        id: post.id,
+        title: post.title,
+        user_id: post.user.id
+      }
     })
     const newPost = await this.$axios.$put(`/posts/${post.id}.json`, post)
     commit('updatePost', { post: newPost })
