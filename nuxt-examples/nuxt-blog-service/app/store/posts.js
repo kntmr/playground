@@ -5,7 +5,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  posts: state => state.posts
+  posts: state => state.posts.map(post => Object.assign({ likes: [] }, post))
 }
 
 export const mutations = {
@@ -66,5 +66,19 @@ export const actions = {
       putData
     ])
     commit('addPost', { post })
+  },
+  async addLikeToPost ({ commit }, { user, post }) {
+    post.likes.push({
+      created_at: moment().format(),
+      user_id: user.id,
+      post_id: post.id
+    })
+    const newPost = await this.$axios.$put(`/posts/${post.id}.json`, post)
+    commit('updatePost', { post: newPost })
+  },
+  async removeLikeFromPost ({ commit }, { user, post }) {
+    post.likes = post.likes.filter(like => like.user_id !== user.id) || []
+    const newPost = await this.$axios.$put(`/posts/${post.id}.json`, post)
+    commit('updatePost', { post: newPost })
   }
 }
