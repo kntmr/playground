@@ -29,11 +29,11 @@
     "transform": {
       "^.+\\.js$": "babel-jest"
     },
-    "moduleNameWrapper": {
-      "^@(.*)$": "<rootDir>/app/$1",
-      "^@@(.*)$": "<rootDir>/$1",
-      "^~(.*)$": "<rootDir>/app/$1",
-      "^~~(.*)$": "<rootDir>/app/$1"
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/app/$1",
+      "^@@/(.*)$": "<rootDir>/$1",
+      "^~/(.*)$": "<rootDir>/app/$1",
+      "^~~/(.*)$": "<rootDir>/$1"
     }
   }
 }
