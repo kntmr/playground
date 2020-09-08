@@ -1,4 +1,4 @@
-import AppToggleButton from '~/app/components/AppToggleButton.vue'
+import AppToggleButton from '~/components/AppToggleButton.vue'
 import { mount } from '@vue/test-utils'
 
 describe('AppToggleButton.vue', () => {
