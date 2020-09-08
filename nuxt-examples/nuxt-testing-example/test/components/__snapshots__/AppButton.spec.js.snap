@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component/AppButton.vue snapshot 1 1`] = `
+<div>
+  <!---->
+   
+  <button
+    type="button"
+  >
+    click
+  </button>
+</div>
+`;
+
+exports[`component/AppButton.vue snapshot 2 1`] = `
+<div>
+  <!---->
+   
+  <button
+    type="button"
+  >
+    click
+  </button>
+</div>
+`;
