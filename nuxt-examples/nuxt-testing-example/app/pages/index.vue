@@ -24,16 +24,26 @@
           GitHub
         </a>
       </div>
+      <div class="links">
+        <h2 class="subtitle">{{ count }}</h2>
+        <button type="button" class="button--grey" style="margin-left:auto;font-family:inherit;" @click="increment">Increment</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     Logo
+  },
+  computed: {
+    ...mapGetters([ 'count' ])
+  },
+  methods: {
+    ...mapActions([ 'increment' ])
   }
 }
 </script>
