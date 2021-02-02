@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://newcss.net/new.min.css">
+    <title>examples</title>
+</head>
+<body>
+<header>
+    <h1>Users</h1>
+</header>
+<main>
+    <table th:if="${users}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th sec:authorize="hasRole('ADMIN')">Role</th>
+                <th sec:authorize="hasRole('ADMIN')">Permissions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.name}">name</td>
+                <td th:text="${user.role.name}" sec:authorize="hasRole('ADMIN')">role</td>
+                <td sec:authorize="hasRole('ADMIN')">
+                    <span th:each="permission : ${user.role.permissions}" th:text="${permission.name}" style="margin-right:0.5em;"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+<footer style="margin-top:2rem;">
+    <a th:href="@{/}">Back</a>
+</footer>
+</body>
+</html>

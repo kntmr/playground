@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://newcss.net/new.min.css">
+    <title>examples</title>
+</head>
+<body>
+<header>
+    <h1>Admin</h1>
+</header>
+<main>
+    <form th:action="@{/users}" method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="radio" name="role" id="admin" value="ADMIN">
+        <label for="admin">ADMIN</label>
+        <input type="radio" name="role" id="guest" value="GUEST">
+        <label for="guest">GUEST</label>
+        <button type="submit">Add user</button>
+    </form>
+</main>
+<footer style="margin-top:2rem;">
+    <a th:href="@{/}">Back</a>
+</footer>
+</body>
+</html>
